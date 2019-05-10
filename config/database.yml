@@ -1,9 +1,0 @@
-development:
-  adapter: mysql2
-  encoding: utf8
-  pool: 5
-  password: root
-  # host: 127.0.0.1
-  socket: /var/run/mysqld/mysqlx.sock
-  host: db
-  database: hellonext
