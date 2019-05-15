@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '/usr/local/bin/docker-compose up -d'
+        sh '/usr/bin/docker-compose up -d'
       }
     }
   }
