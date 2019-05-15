@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'docker_rails'
+    }
+
+  }
   stages {
     stage('Build') {
       steps {
