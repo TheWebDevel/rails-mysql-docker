@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    dockerfile {
-      filename 'Dockerfile'
-    }
-
-  }
+  agent any
   stages {
     stage('Build') {
       agent {
@@ -14,7 +9,7 @@ pipeline {
 
       }
       steps {
-        git(url: 'https://github.com/TheWebDevel/rails-mysql-docker.git', credentialsId: 'fe9a0bca-6c2f-48d9-8876-6cc23e2a33c9	', branch: 'master')
+        echo 'Build'
       }
     }
   }
