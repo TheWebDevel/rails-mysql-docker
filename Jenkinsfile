@@ -1,7 +1,7 @@
 pipeline {
   agent {
-    node {
-      label 'docker_rails'
+    dockerfile {
+      filename 'Dockerfile'
     }
 
   }
