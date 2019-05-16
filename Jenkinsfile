@@ -7,8 +7,14 @@ pipeline {
   }
   stages {
     stage('Build') {
+      agent {
+        dockerfile {
+          filename 'Dockerfile'
+        }
+
+      }
       steps {
-        sh '/usr/bin/docker-compose up -d'
+        git(url: 'https://github.com/TheWebDevel/rails-mysql-docker.git', credentialsId: 'fe9a0bca-6c2f-48d9-8876-6cc23e2a33c9	', branch: 'master')
       }
     }
   }
