@@ -1,31 +1,33 @@
 pipeline {
-  environment {
-    registry = "sathishcodes/sample"
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-  }
   agent any
   stages {
     stage('Building image') {
-      steps{
+      steps {
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
+
       }
     }
     stage('Deploy Image') {
-      steps{
+      steps {
         script {
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
           }
         }
+
       }
     }
     stage('Remove Unused docker image') {
-      steps{
+      steps {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
+  }
+  environment {
+    registry = 'sathishcodes/sample'
+    registryCredential = 'dockerhub'
+    dockerImage = ''
   }
 }
