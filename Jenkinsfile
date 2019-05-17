@@ -5,9 +5,6 @@ pipeline {
     dockerImage = ''
   }
   agent any
-  dockerfile {
-   filename 'Dockerfile'
-  }
   stages {
     stage('Building image') {
       steps{
