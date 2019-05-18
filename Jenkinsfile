@@ -9,8 +9,6 @@ pipeline {
     stage('Deploy Image') {
       steps {
         script {
-          websiteImage = "rails-mysql-docker_master_website" + ":$BUILD_NUMBER"
-          sidekiqImage = "rails-mysql-docker_master_sidekiq" + ":$BUILD_NUMBER"
           docker.withRegistry( '', registryCredential ) {
             websiteImage.push()
             sidekiqImage.push()
@@ -29,6 +27,8 @@ pipeline {
   environment {
     registry = 'sathishcodes/sample'
     registryCredential = 'dockerhub'
+    websiteImage = 'rails-mysql-docker_master_website'
+    sidekiqImage = 'rails-mysql-docker_master_sidekiq'
     dockerImage = ''
   }
 }
