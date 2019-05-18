@@ -3,17 +3,17 @@ pipeline {
   stages {
     stage('Building image') {
       steps {
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
-
+        sh 'docker-compose -d build'
       }
     }
     stage('Deploy Image') {
       steps {
         script {
+          websiteImage = "rails-mysql-docker_website" + ":$BUILD_NUMBER"
+          sidekiqImage = "rails-mysql-docker_sidekiq" + ":$BUILD_NUMBER"
           docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
+            websiteImage.push()
+            sidekiqImage.push()
           }
         }
 
@@ -21,7 +21,8 @@ pipeline {
     }
     stage('Remove Unused docker image') {
       steps {
-        sh "docker rmi $registry:$BUILD_NUMBER"
+        sh "docker rmi $websiteImage:$BUILD_NUMBER"
+        sh "docker rmi $sidekiqImage:$BUILD_NUMBER"
       }
     }
   }
